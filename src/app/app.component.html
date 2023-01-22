@@ -1,0 +1,46 @@
+<div class="BG">
+    <router-outlet></router-outlet>
+</div>
+<nav class="navbar navbar-expand-lg bg-black navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a href="/"><img src="../assets/images/logo.png" width="50"></a>
+        <a class=" navbar-brand" href="/">Akdeniz University</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li *ngIf="firebaseService.getAuth()" class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['lessons']">Lessons</a>
+                </li>
+                <li *ngIf="firebaseService.getAuth()" class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['members']">Members</a>
+                </li>
+                <li *ngIf="firebaseService.getAuth()" class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['chat']">Chat</a>
+                </li>
+            </ul>
+            <div class="topnav-right">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li *ngIf="!firebaseService.getAuth()" class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="login">Login</a>
+                    </li>
+                    <li class="nav-item dropdown" *ngIf="firebaseService.getAuth()">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href=""><img src="../assets/images/user.png" width="30px"></a>
+                            <!-- {{ firebaseService.getUser() }} -->
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" [routerLink]="['profile']">Profile</a></li>
+                            <li><a class="dropdown-item" href="/" (click)="logOut()">Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</nav>

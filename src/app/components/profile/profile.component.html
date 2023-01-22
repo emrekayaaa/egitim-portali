@@ -1,0 +1,34 @@
+<div class="container pt-5 mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="row justify-content-between">
+        <div class="col-8">
+          <h3 class="text-white">Profile</h3>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <form [formGroup]="frm" (ngSubmit)="update()">
+          <div class="card">
+            <div class="card-body">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" formControlName="displayName">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" formControlName="email">
+              </div>
+              <div class="form-group">
+                <label>Role</label>
+                <input type="text" class="form-control" formControlName="role">
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="loginBox">
+  <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
+  <h3>Sign in here</h3>
+  <form>
+    <div class="inputBox">
+      <input id="mail" type="text" name="E-mail" value="admin@gmail.com" placeholder="E-mail" #mail>
+      <input id="password" type="password" name="Password" value="password" placeholder="Password" #password>
+    </div>
+    <input type="button" name="" value="Login" (click)="login({ email: mail.value, password: password.value })">
+  </form>
+</div>

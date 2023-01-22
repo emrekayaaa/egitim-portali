@@ -1,0 +1,134 @@
+<hr>
+<div class="BG">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="row justify-content-between">
+          <div class="col-8">
+            <h3>Homeworks</h3>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-primary" (click)="add(addEditModal)">
+              Add Homework
+            </button>
+          </div>
+        </div>
+        <table class="table table-hover table-striped table-dark mt-3">
+          <thead id="headColor">
+            <th>Homework ID</th>
+            <th>Homework Name</th>
+            <th>Detail</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let homework of homeworks">
+              <td>{{homework.uid}}</td>
+              <td>{{homework.displayName}}</td>
+              <td>
+                <button class=" btn btn-info" (click)="edit(homework, detailModal)">Detail</button>
+              </td>
+              <td>
+                <button class=" btn btn-warning" (click)="edit(homework, addEditModal)">Edit</button>
+              </td>
+              <td>
+                <button class="btn btn-danger" (click)="destroy(homework,deleteModal)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" #teacherModal>
+    <div class="modal-dialog">
+      <form [formGroup]="formGp" (ngSubmit)="save()">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">{{modalHead}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" #addEditModal>
+    <div class="modal-dialog">
+      <form [formGroup]="formGp" (ngSubmit)="save()">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">{{modalHead}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label>Homework Name</label>
+              <input type="text" id="newLessonName" class="form-control" formControlName="name">
+              <label>Detail</label>
+              <textarea class="form-control" formControlName="detail" cols="55" rows="10"></textarea>
+              <input type="hidden" id="newLessonId" class="form-control" formControlName="uid">
+            </div>
+
+          </div>
+          <div class=" modal-footer">
+
+            <input type="submit" class="btn btn-primary" value="Save">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" #deleteModal>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">{{modalHead}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6 *ngIf="homework">{{homework.displayName}} lesson will be deleted, would you approve?</h6>
+        </div>
+        <div class="modal-footer">
+
+          <button class="btn btn-danger" *ngIf="homework" (click)="delete()">Delete</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" #detailModal>
+    <div class="modal-dialog">
+      <form [formGroup]="formGp" (ngSubmit)="save()">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">{{modalHead}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label>Homework Name</label>
+              <input type="text" id="newLessonName" class="form-control" formControlName="name">
+              <label>Detail</label>
+              <textarea class="form-control" formControlName="detail" cols="55" rows="10"></textarea>
+              <input type="hidden" id="newLessonId" class="form-control" formControlName="uid">
+            </div>
+
+          </div>
+          <div class=" modal-footer">
+
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

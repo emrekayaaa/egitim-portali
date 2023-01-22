@@ -1,0 +1,125 @@
+<hr>
+<div class="BG">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="row justify-content-between">
+                    <div class="col-8">
+                        <h3>Lessons</h3>
+                    </div>
+                    <div class="col-2">
+                        <!-- *ngIf="currentUser == 'teacher'"    -->
+                        <button class="btn btn-primary" (click)="add(addEditModal)">
+                            Add Lesson
+            </button>
+                    </div>
+                </div>
+                <table class="table table-hover table-striped table-dark mt-3">
+                    <thead id="headColor">
+                        <!-- <th>Teacher</th> -->
+                        <th>Lesson Name</th>
+                        <th>Lesson Credit</th>
+                        <th>Homeworks</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let lesson of lessons">
+                            <!-- <td>
+                <button class=" btn btn-dark" (click)="getTeacher(lesson.teacherId, teacherModal)">Teacher</button>
+              </td> -->
+                            <td>{{lesson.name}}</td>
+                            <td>{{lesson.credit}}</td>
+                            <td>
+                                <button class="btn btn-info" [routerLink]="['/homeworks', lesson.uid]">Homeworks</button>
+                            </td>
+                            <td>
+                                <button class=" btn btn-warning" (click)="edit(lesson, addEditModal)">Edit</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="destroy(lesson,deleteModal)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" #teacherModal>
+        <div class="modal-dialog">
+            <form [formGroup]="formGp" (ngSubmit)="save()">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">{{modalHead}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div *ngIf="teacher" class="modal-body">
+
+                        {{ teacher.displayName }}
+                        <br /> {{ teacher.email }}
+
+                    </div>
+                    <div *ngIf="!teacher">
+                        <h6>Teacher not found</h6>
+                    </div>
+
+                    <!-- <div class=" modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+              (click)="handleCloseTeacher()">Close</button>
+          </div> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" #addEditModal>
+        <div class="modal-dialog">
+            <form [formGroup]="formGp" (ngSubmit)="save()">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">{{modalHead}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label>Lesson Name</label>
+                            <input type="text" id="newLessonName" class="form-control" formControlName="name">
+                            <label>Lesson Credit</label>
+                            <input type="number" id="newLessonCredit" class="form-control" formControlName="credit">
+                            <input type="hidden" id="newLessonId" class="form-control" formControlName="uid">
+                        </div>
+
+                    </div>
+                    <div class=" modal-footer">
+
+                        <input type="submit" class="btn btn-primary" value="Save">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" #deleteModal>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">{{modalHead}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 *ngIf="lesson">{{lesson.name}} lesson will be deleted, would you approve?</h6>
+                </div>
+                <div class="modal-footer">
+
+                    <button class="btn btn-danger" *ngIf="lesson" (click)="delete()">Delete</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
